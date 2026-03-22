@@ -76,17 +76,17 @@
 
 ### 任务（TDD）
 
-- [ ] **先**为「注册→登录→访问 me」与「错误密码」编写失败用例（集成测试或 `#[sqlx::test]`），再补迁移与实现。
-- [ ] SQLx 迁移：`users` 表（对齐 [02 数据模型 §3](../02-design/02-数据模型.md) 最小字段）。
-- [ ] `POST /api/v1/auth/register`、`POST /api/v1/auth/login`、`POST /api/v1/auth/refresh`、`GET /api/v1/me`（对齐 [03](../02-design/03-API与集成契约.md)）。
-- [ ] 密码 **argon2**（或项目统一算法）；JWT access + refresh 策略与过期时间写进代码常量或配置。
-- [ ] 补充 **refresh 轮换**、边界错误码的测试，再重构。
+- [x] **先**为「注册→登录→访问 me」与「错误密码」编写失败用例（集成测试或 `#[sqlx::test]`），再补迁移与实现。
+- [x] SQLx 迁移：`users` 表（对齐 [02 数据模型 §3](../02-design/02-数据模型.md) 最小字段）。
+- [x] `POST /api/v1/auth/register`、`POST /api/v1/auth/login`、`POST /api/v1/auth/refresh`、`GET /api/v1/me`（对齐 [03](../02-design/03-API与集成契约.md)）。
+- [x] 密码 **argon2**（或项目统一算法）；JWT access + refresh 策略与过期时间写进代码常量或配置。
+- [x] 补充 **refresh 轮换**、边界错误码的测试，再重构。
 
 ### DoD
 
-- [ ] 上述行为均有自动化测试覆盖；主路径为 **红→绿** 可追溯。
-- [ ] OpenAPI 中上述路径与请求/响应模型已更新。
-- [ ] 无密钥硬编码；测试使用临时目录数据库或 `#[sqlx::test]`。
+- [x] 上述行为均有自动化测试覆盖；主路径为 **红→绿** 可追溯。
+- [x] OpenAPI 中上述路径与请求/响应模型已更新。
+- [x] 无密钥硬编码；测试使用临时目录数据库或 `#[sqlx::test]`。
 
 ### 验收方式
 

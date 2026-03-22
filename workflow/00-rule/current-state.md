@@ -1,9 +1,9 @@
 # 当前状态
 
-**阶段**：**MVP 阶段 0（工程与契约）** 已在代码中落地：Cargo workspace、`GET /api/v1/health`、集成测试、`openapi.yaml`、CI。
+**阶段**：**MVP 阶段 1（账户与鉴权）** 已在代码中落地：SQLx + SQLite、`users` 迁移、注册/登录/refresh、`GET /api/v1/me`、Argon2、JWT、集成测试与 `openapi.yaml` 对齐。
 
-**Done**：Axum 服务端骨架；TDD 健康检查测试；MIT；GitHub `openchat`；设计文档与 03-plan。
+**Done**：阶段 0 全部；阶段 1 路由与测试（`tests/auth.rs`、`tests/common`）；CI 仍跑 `cargo fmt` / `clippy` / `test`。
 
-**Next**：按 [03-plan/01plan.md](../03-plan/01plan.md) **阶段 1**（账户与鉴权：SQLx、`users`、JWT）。
+**Next**：按 [03-plan/01plan.md](../03-plan/01plan.md) **阶段 2**（会话与消息 REST）。
 
 **GitHub**：<https://github.com/jqlong17/openchat>

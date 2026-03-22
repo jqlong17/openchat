@@ -14,10 +14,16 @@ name = "openchat_server"
 path = "src/lib.rs"
 
 [dependencies]
+argon2 = "0.5"
 axum = { version = "0.8", features = ["json"] }
+chrono = { version = "0.4", features = ["serde"] }
+jsonwebtoken = "9"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+sqlx = { version = "0.8", features = ["runtime-tokio", "sqlite", "migrate", "chrono"] }
 tokio = { version = "1", features = ["macros", "rt-multi-thread", "net"] }
+uuid = { version = "1", features = ["v4"] }
+rand_core = { version = "0.6", features = ["getrandom"] }
 
 [dev-dependencies]
 http-body-util = "0.1"

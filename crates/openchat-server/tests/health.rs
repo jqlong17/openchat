@@ -1,14 +1,15 @@
 //! 阶段 0：健康检查集成测试（TDD：先于实现存在，保证行为可回归）。
 
+mod common;
+
 use axum::body::Body;
 use axum::http::{Request, StatusCode};
 use http_body_util::BodyExt;
-use openchat_server::app;
 use tower::ServiceExt;
 
 #[tokio::test]
 async fn get_health_returns_200_and_ok_json() {
-    let app = app();
+    let app = common::test_router().await;
     let response = app
         .oneshot(
             Request::builder()

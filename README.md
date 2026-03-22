@@ -45,7 +45,7 @@
 
 ---
 
-## 本地运行（阶段 0）
+## 本地运行
 
 需要 **Rust 工具链（stable）**。在仓库根目录：
 
@@ -58,12 +58,24 @@ curl -sSf http://127.0.0.1:8080/api/v1/health
 
 默认监听 `0.0.0.0:8080`，可通过环境变量 **`PORT`** 修改。
 
+**阶段 1（账户与鉴权）**：默认使用 **`DATABASE_URL=sqlite:./data/openchat.db`**（首次运行会创建 `./data/`），以及 **`JWT_SECRET`**（未设置时使用仅适用于本地的占位值，生产环境必须配置）。变量说明见根目录 **`.env.example`**。
+
+注册与访问示例：
+
+```bash
+curl -sS -X POST http://127.0.0.1:8080/api/v1/auth/register \
+  -H 'Content-Type: application/json' \
+  -d '{"username":"demo","password":"password123","display_name":"Demo"}'
+# 将响应中的 access_token 填入：
+curl -sS http://127.0.0.1:8080/api/v1/me -H "Authorization: Bearer <access_token>"
+```
+
 ## 仓库结构（简）
 
 | 路径 | 说明 |
 |------|------|
 | `crates/openchat-server/` | Rust 服务端 crate（可执行文件 + `lib` 供测试） |
-| `openapi.yaml` | HTTP API 契约（草案，与实现对齐） |
+| `openapi.yaml`（根目录） | HTTP API 契约（与实现对齐） |
 | `workflow/` | 规则、调研、设计、计划等协作过程文档 |
 
 ## 许可证

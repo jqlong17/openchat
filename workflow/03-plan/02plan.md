@@ -14,11 +14,13 @@
 
 ## 如何使用
 
-| 场景 | 写法 |
-|------|------|
+
+| 场景      | 写法                                                  |
+| ------- | --------------------------------------------------- |
 | 阶段 0 开工 | 在下方「阶段 0 细化」列出：PR1 建 workspace、PR2 加 axum 与 health… |
-| 并行开发 | 按 `crates/*` 或 `src/routes/*` 分子节，@负责人 |
-| 阻塞/风险 | 在对应任务下标 `BLOCKED:` 与依赖 |
+| 并行开发    | 按 `crates/`* 或 `src/routes/*` 分子节，@负责人              |
+| 阻塞/风险   | 在对应任务下标 `BLOCKED:` 与依赖                              |
+
 
 ---
 
@@ -26,9 +28,9 @@
 
 > 对应 [01plan 阶段 0](./01plan.md#阶段-0工程与契约)。**已完成**（合并为一次交付亦可）。
 
-- [x] 根目录 `Cargo.toml` workspace + `crates/openchat-server` + 可运行 `main`（Axum）。
-- [x] 集成测试 `tests/health.rs` + `GET /api/v1/health` + `openapi.yaml` + README。
-- [x] `.github/workflows/ci.yml`（fmt / clippy / test）。
+- 根目录 `Cargo.toml` workspace + `crates/openchat-server` + 可运行 `main`（Axum）。
+- 集成测试 `tests/health.rs` + `GET /api/v1/health` + `openapi.yaml` + README。
+- `.github/workflows/ci.yml`（fmt / clippy / test）。
 
 ---
 
@@ -56,7 +58,10 @@
 
 ## 修订记录
 
-| 版本 | 日期 | 说明 |
-|------|------|------|
-| 0.1 | 2026-03-22 | 初稿：与 01plan 分工、阶段 0 示例骨架 |
+
+| 版本  | 日期         | 说明                          |
+| --- | ---------- | --------------------------- |
+| 0.1 | 2026-03-22 | 初稿：与 01plan 分工、阶段 0 示例骨架    |
 | 0.2 | 2026-03-22 | 明确细化任务遵循 TDD；阶段 0 示例改为先测后实现 |
+
+
