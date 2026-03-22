@@ -1,0 +1,29 @@
+# 环境
+.env
+.env.local
+.env.*.local
+
+# 依赖
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# 构建与产物
+dist/
+build/
+*.egg-info/
+.next/
+out/
+
+# 日志与本地数据库
+*.log
+*.db
+*.sqlite
+
+# IDE
+.idea/
+.vscode/
+*.swp
+.DS_Store
