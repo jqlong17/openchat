@@ -5,8 +5,10 @@ use axum::http::HeaderMap;
 use axum::Json;
 use serde::{Deserialize, Serialize};
 use sqlx::Row;
+use utoipa::ToSchema;
 
 use crate::error::ApiError;
+use crate::error::ErrorBody;
 use crate::jwt;
 use crate::password;
 use crate::state::AppState;
@@ -14,38 +16,44 @@ use crate::HealthResponse;
 
 // --- health ---
 
+#[utoipa::path(
+    get,
+    path = "/api/v1/health",
+    responses((status = 200, description = "服务正常", body = crate::HealthResponse)),
+    tag = "health"
+)]
 pub async fn health_handler() -> Json<HealthResponse> {
     Json(HealthResponse { status: "ok" })
 }
 
 // --- auth DTO ---
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, ToSchema)]
 pub struct RegisterBody {
     pub username: String,
     pub password: String,
     pub display_name: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, ToSchema)]
 pub struct LoginBody {
     pub username: String,
     pub password: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, ToSchema)]
 pub struct RefreshBody {
     pub refresh_token: String,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, ToSchema)]
 pub struct AuthResponse {
     pub access_token: String,
     pub refresh_token: String,
     pub expires_in: u64,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, ToSchema)]
 pub struct UserResponse {
     pub id: String,
     pub username: String,
@@ -76,6 +84,18 @@ fn validate_register(body: &RegisterBody) -> Result<(), ApiError> {
     Ok(())
 }
 
+#[utoipa::path(
+    post,
+    path = "/api/v1/auth/register",
+    request_body = RegisterBody,
+    responses(
+        (status = 200, description = "成功", body = AuthResponse),
+        (status = 400, description = "参数不合法", body = ErrorBody),
+        (status = 409, description = "用户名已存在", body = ErrorBody),
+        (status = 500, description = "服务器错误", body = ErrorBody)
+    ),
+    tag = "auth"
+)]
 pub async fn register_handler(
     State(state): State<AppState>,
     Json(body): Json<RegisterBody>,
@@ -116,6 +136,17 @@ pub async fn register_handler(
     }))
 }
 
+#[utoipa::path(
+    post,
+    path = "/api/v1/auth/login",
+    request_body = LoginBody,
+    responses(
+        (status = 200, description = "成功", body = AuthResponse),
+        (status = 401, description = "凭据无效", body = ErrorBody),
+        (status = 500, description = "服务器错误", body = ErrorBody)
+    ),
+    tag = "auth"
+)]
 pub async fn login_handler(
     State(state): State<AppState>,
     Json(body): Json<LoginBody>,
@@ -142,6 +173,16 @@ pub async fn login_handler(
     }))
 }
 
+#[utoipa::path(
+    post,
+    path = "/api/v1/auth/refresh",
+    request_body = RefreshBody,
+    responses(
+        (status = 200, description = "成功", body = AuthResponse),
+        (status = 401, description = "refresh 无效或过期", body = ErrorBody)
+    ),
+    tag = "auth"
+)]
 pub async fn refresh_handler(
     State(state): State<AppState>,
     Json(body): Json<RefreshBody>,
@@ -171,6 +212,17 @@ fn bearer_token(headers: &HeaderMap) -> Result<&str, ApiError> {
         .ok_or_else(|| ApiError::unauthorized("expected Bearer token"))
 }
 
+#[utoipa::path(
+    get,
+    path = "/api/v1/me",
+    responses(
+        (status = 200, description = "成功", body = UserResponse),
+        (status = 401, description = "未授权或 token 类型错误", body = ErrorBody),
+        (status = 500, description = "服务器错误", body = ErrorBody)
+    ),
+    security(("bearer_auth" = [])),
+    tag = "auth"
+)]
 pub async fn me_handler(
     State(state): State<AppState>,
     headers: HeaderMap,

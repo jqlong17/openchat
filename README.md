@@ -54,9 +54,17 @@ cargo test --workspace
 cargo run -p openchat-server
 # 另开终端：
 curl -sSf http://127.0.0.1:8080/api/v1/health
+# OpenAPI 文档（运行时 JSON，与代码同源）：
+curl -sSf http://127.0.0.1:8080/api/v1/openapi.json | head
 ```
 
 默认监听 `0.0.0.0:8080`，可通过环境变量 **`PORT`** 修改。
+
+**OpenAPI 契约**：由 **[utoipa](https://github.com/juhaku/utoipa)** 从路由与类型生成；运行中可在 **`GET /api/v1/openapi.json`** 拉取。仓库根目录 **`openapi.json`** 为导出快照，与集成测试比对；更新 API 后请执行：
+
+```bash
+cargo run -p openchat-server --bin export-openapi > openapi.json
+```
 
 **阶段 1（账户与鉴权）**：默认使用 **`DATABASE_URL=sqlite:./data/openchat.db`**（首次运行会创建 `./data/`），以及 **`JWT_SECRET`**（未设置时使用仅适用于本地的占位值，生产环境必须配置）。变量说明见根目录 **`.env.example`**。
 
@@ -75,7 +83,7 @@ curl -sS http://127.0.0.1:8080/api/v1/me -H "Authorization: Bearer <access_token
 | 路径 | 说明 |
 |------|------|
 | `crates/openchat-server/` | Rust 服务端 crate（可执行文件 + `lib` 供测试） |
-| `openapi.yaml`（根目录） | HTTP API 契约（与实现对齐） |
+| `openapi.json`（根目录） | HTTP API 契约导出（utoipa 生成，与 `GET /api/v1/openapi.json` 一致） |
 | `workflow/` | 规则、调研、设计、计划等协作过程文档 |
 
 ## 许可证
