@@ -10,6 +10,9 @@ venv/
 __pycache__/
 *.pyc
 
+# Rust
+/target/
+
 # 构建与产物
 dist/
 build/

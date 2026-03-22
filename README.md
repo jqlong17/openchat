@@ -11,6 +11,7 @@
 **技术栈与生态**
 
 - **语言**：**服务端技术栈统一为 Rust**（IM 核心、API、集成层均以 Rust 实现），兼顾性能、并发与可分发性（如单二进制部署）；OpenClaw 等为独立系统，通过 HTTP 对接。
+- **HTTP（MVP 已选）**：**Axum**（阶段 0 起用于路由与 JSON）。
 - **参考**：工程与产品形态上**参考 [VoceChat](https://github.com/Privoce/vocechat-server-rust)** 等开源项目（轻量、易集成、私有化友好）。
 - **生态**：目标是成为 **OpenClaw 开放生态中的一环**——在消息与连接器层面与 OpenClaw 对齐，而不是再造一套封闭的 IM 孤岛。
 
@@ -44,11 +45,25 @@
 
 ---
 
+## 本地运行（阶段 0）
+
+需要 **Rust 工具链（stable）**。在仓库根目录：
+
+```bash
+cargo test --workspace
+cargo run -p openchat-server
+# 另开终端：
+curl -sSf http://127.0.0.1:8080/api/v1/health
+```
+
+默认监听 `0.0.0.0:8080`，可通过环境变量 **`PORT`** 修改。
+
 ## 仓库结构（简）
 
 | 路径 | 说明 |
 |------|------|
-| `src/` | OpenChat 产品源码 |
+| `crates/openchat-server/` | Rust 服务端 crate（可执行文件 + `lib` 供测试） |
+| `openapi.yaml` | HTTP API 契约（草案，与实现对齐） |
 | `workflow/` | 规则、调研、设计、计划等协作过程文档 |
 
 ## 许可证

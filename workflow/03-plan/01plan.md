@@ -48,19 +48,19 @@
 
 ### 任务（TDD）
 
-- [ ] 在仓库根初始化 **Rust workspace**（MVP 可先 **单 crate** `openchat-server`，与 [04](../02-design/04-代码仓库结构.md) 一致）。
-- [ ] **先写**集成测试：`GET /api/v1/health`（或选定路径）期望 `200` 与 JSON 体（测试**应先失败**）。
-- [ ] 增加根目录 **`openapi.yaml`**（至少含 `info`、`servers`、健康检查路径、`components/securitySchemes` 占位）。
-- [ ] **再实现**路由与处理器，直至测试转绿；必要时重构。
-- [ ] **`.env.example`** 补充：`DATABASE_URL`、`JWT_SECRET`（或分文件密钥路径）等变量名。
-- [ ] **`.github/workflows/ci.yml`**：`cargo fmt --check`、`cargo clippy`、**`cargo test`**（阶段 0 起非空测试集至少含健康检查）。
+- [x] 在仓库根初始化 **Rust workspace**（MVP 可先 **单 crate** `openchat-server`，与 [04](../02-design/04-代码仓库结构.md) 一致）。
+- [x] **先写**集成测试：`GET /api/v1/health`（或选定路径）期望 `200` 与 JSON 体（测试**应先失败**）。
+- [x] 增加根目录 **`openapi.yaml`**（至少含 `info`、`servers`、健康检查路径、`components/securitySchemes` 占位）。
+- [x] **再实现**路由与处理器，直至测试转绿；必要时重构。
+- [x] **`.env.example`** 补充：`DATABASE_URL`、`JWT_SECRET`（或分文件密钥路径）等变量名。
+- [x] **`.github/workflows/ci.yml`**：`cargo fmt --check`、`cargo clippy`、**`cargo test`**（阶段 0 起非空测试集至少含健康检查）。
 
 ### DoD（完成标准）
 
-- [ ] **TDD**：健康检查路径存在**先于实现**的测试记录（同一 PR 或紧邻提交可追溯）。
-- [ ] 本地执行 `cargo run` 可监听端口，`cargo test` 与 curl 健康检查均成功。
-- [ ] `openapi.yaml` 能被 Swagger Editor / Redoc 打开且无语法错误。
-- [ ] `README.md`（根）增加「如何启动服务端」**最少命令**（可与最终实现一致后微调）。
+- [x] **TDD**：健康检查路径存在**先于实现**的测试记录（同一 PR 或紧邻提交可追溯）。
+- [x] 本地执行 `cargo run` 可监听端口，`cargo test` 与 curl 健康检查均成功。
+- [x] `openapi.yaml` 能被 Swagger Editor / Redoc 打开且无语法错误。
+- [x] `README.md`（根）增加「如何启动服务端」**最少命令**（可与最终实现一致后微调）。
 
 ### 验收方式
 
@@ -193,3 +193,4 @@
 | 0.1 | 2026-03-22 | 可执行 MVP：阶段 0–5 与 DoD |
 | 0.2 | 2026-03-22 | 明确 01plan 为总表（含工程初始化）；细化拆至 [02plan](./02plan.md) |
 | 0.3 | 2026-03-22 | 全计划按 **TDD**（红-绿-重构）；各阶段任务与 DoD 对齐；CI 从阶段 0 纳入 `cargo test` |
+| 0.4 | 2026-03-22 | **阶段 0 已完成**：workspace + Axum + health 集成测试 + openapi + CI |

@@ -1,9 +1,9 @@
 # 当前状态
 
-**阶段**：设计与 MVP 执行计划已就绪；**代码与 GitHub 远程**已初始化方向（见下）。
+**阶段**：**MVP 阶段 0（工程与契约）** 已在代码中落地：Cargo workspace、`GET /api/v1/health`、集成测试、`openapi.yaml`、CI。
 
-**Done**：技术架构、数据模型、API 契约、仓库结构、协作治理、TDD 计划；**MIT** 许可证；**MVP 约定**：HTTP API + 测试 + 命令行验收；OpenClaw **协议 + Mock**。
+**Done**：Axum 服务端骨架；TDD 健康检查测试；MIT；GitHub `openchat`；设计文档与 03-plan。
 
-**Next**：按 [03-plan/01plan.md](../03-plan/01plan.md) **阶段 0** 落地 Rust 工程、`openapi.yaml`、健康检查测试与 CI。
+**Next**：按 [03-plan/01plan.md](../03-plan/01plan.md) **阶段 1**（账户与鉴权：SQLx、`users`、JWT）。
 
-**GitHub**：远程仓库名 **`openchat`**（MIT），克隆与推送以 `README` 或仓库页说明为准。
+**GitHub**：<https://github.com/jqlong17/openchat>
