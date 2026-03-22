@@ -1,5 +1,7 @@
 # OpenChat
 
+仓库：<https://github.com/jqlong17/openchat>
+
 ## 项目定位
 
 **产品目标**：开发一款**类似微信**的即时通讯与社交产品，并**支持接入 [OpenClaw](https://github.com/openclaw/openclaw)**，使用户能在熟悉的聊天场景里与 Agent 协作。
