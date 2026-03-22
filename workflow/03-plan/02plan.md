@@ -24,12 +24,11 @@
 
 ## 阶段 0 细化（示例骨架，开工后替换为真实任务）
 
-> 对应 [01plan 阶段 0](./01plan.md#阶段-0工程与契约)。
+> 对应 [01plan 阶段 0](./01plan.md#阶段-0工程与契约)。**已完成**（合并为一次交付亦可）。
 
-- [ ] PR / 提交 1：根目录 `Cargo.toml` workspace + `crates/openchat-server`（或单包）与可编译 `main`。
-- [ ] PR / 提交 2：**先**加集成测试 `health_returns_200`（**当前应失败**）→ 接入 HTTP 框架并实现 `GET /api/v1/health` → **绿**。
-- [ ] PR / 提交 3：根目录 `openapi.yaml` 与路由对齐；README：`cargo run` + `cargo test`。
-- [ ] PR / 提交 4：`.github/workflows/ci.yml`（含 `cargo test`，与 01plan 一致）。
+- [x] 根目录 `Cargo.toml` workspace + `crates/openchat-server` + 可运行 `main`（Axum）。
+- [x] 集成测试 `tests/health.rs` + `GET /api/v1/health` + `openapi.yaml` + README。
+- [x] `.github/workflows/ci.yml`（fmt / clippy / test）。
 
 ---
 
